@@ -10,7 +10,7 @@
     <% if user_signed_in? %>
     <% like = current_user.likes.find_by_idea_id(idea) %>
     <% if like %>
-        <%= link_to 'Unlike', idea_like_path(idea, like), method: :delete, :class=>'border border-dark rounded py-1 px-3 ml-5' %>
+        <%= link_to 'Liked', idea_like_path(idea, like), method: :delete, :class=>'border border-dark rounded py-1 px-3 ml-5' %>
     <% else %>
         <%= link_to 'Like', idea_likes_path(idea), method: :post, :class=>'border border-dark rounded py-1 px-3 ml-5' %>
     <% end %>
