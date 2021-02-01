@@ -1,0 +1,26 @@
+
+<div class="container card" style="max-width: 992px;">
+    <h3><%= @ideas.title %></h3>
+    <p><%= @ideas.description %></p>
+    <p>Posted <%= time_ago_in_words(@ideas.created_at) %> ago by <%= @ideas.user.full_name %></p>
+    <div>
+        <%= link_to "Edit", edit_idea_path(@ideas.id), :class=>"btn btn-outline-primary btn-sm" %>  
+        <%= link_to "Delete", idea_path, method: :delete, data:{confirm: "Are you sure ?"}, :class=>"btn btn-outline-danger btn-sm" %>
+    </div><br>
+    <%= form_with(model: [@ideas, @review], local: true) do |f| %>
+    <div>
+    <%= f.label :review %>
+    <%= f.text_area :body, placeholder: :reviews, class: "form-control col" %>
+    <%= f.submit :Submit, class: 'btn btn-outline-primary btn-sm mt-2'%>
+    </div><br>
+    <% end %>
+    <% @reviews.each do |review| %>
+    <div>
+        <div><%= review.body %></div>
+        <small>
+            Commented <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.name %>- 
+            <%= link_to "Delete", idea_review_path(@ideas, review), method: :delete,data: {confirm: "Are you sure?"}, style: "color:red" %>
+        </small>
+    </div><br>
+    <% end %>
+</div>
